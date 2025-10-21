@@ -97,7 +97,7 @@ body {
 @keyframes slideUp { 0% { top: 0; opacity: 1; } 100% { top: -120vh; opacity: 0; } }
 @keyframes sideSway { 0% { margin-left: 0; } 50% { margin-left: -20px; } 100% { margin-left: 50px; } }
 
-.reset { text-align: center; margin-top: 15px; z-index: 2; position: relative; }
+.reset { text-align: center; margin-top: 150px; z-index: 2; position: relative; }
 .reset button {
   font-weight: 800; transition: all .1s linear; background: transparent; border: 2px solid #d9534f; border-radius: 4px; color: #d9534f;
   display: inline-block; font-size: 14px; text-transform: uppercase; margin: 5px; padding: 10px; line-height: 1; min-width: 120px; cursor: pointer;
