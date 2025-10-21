@@ -1,0 +1,184 @@
+/* ===== Parallax Background ===== */
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Dancing Script", cursive;
+  background: #fbe3ea; /* fallback color */
+  overflow-x: hidden;
+}
+
+.bg-parallax {
+  position: fixed;
+  inset: 0;
+  background: url("./bg.png") center center / cover no-repeat;
+  z-index: 0;
+  will-change: transform;
+  transform: translate3d(0,0,0) scale(1.05); /* slight scale to avoid edges on move */
+}
+
+/* ===== Envelope / UI ===== */
+.envlope-wrapper {
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: 60vh;
+  z-index: 2; /* above background */
+}
+
+#envelope {
+  z-index: 4;
+  position: relative;
+  width: 280px;
+  height: 180px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 150px;
+  background-color: #d9534f;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.front { position: absolute; width: 0; height: 0; z-index: 3; }
+.flap {
+  border-left: 140px solid transparent;
+  border-right: 140px solid transparent;
+  border-bottom: 82px solid transparent;
+  border-top: 98px solid #d9534f;
+  transform-origin: top;
+  pointer-events: none;
+}
+.pocket {
+  border-left: 140px solid #f5a3a2;
+  border-right: 140px solid #f5a3a2;
+  border-bottom: 90px solid #ff6f61;
+  border-top: 90px solid transparent;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.letter {
+  position: relative;
+  background-color: #fff;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 90%;
+  top: 5%;
+  border-radius: 6px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+  z-index: 5;
+}
+.letter:after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+
+.words { position: absolute; left: 10%; width: 80%; height: 14%; background-color: #ffe6e6; }
+.words.line1 { top: 10%; width: 35%; height: 7%; font-size: 0.8rem; }
+.words.line2 { top: 30%; text-align: center; font-size: 1.1rem; }
+.words.line3 { top: 50%; text-align: center; font-size: 1.1rem; }
+.words.line4 { top: 70%; text-align: center; font-size: 1rem; }
+
+.open .flap { transform: rotateX(180deg); transition: transform 0.4s ease, z-index 0.6s; z-index: 1; }
+.close .flap { transform: rotateX(0deg); transition: transform 0.4s 0.6s ease, z-index 1s; z-index: 5; }
+.close .letter { transform: translateY(0px); transition: transform 0.4s ease, z-index 1s; z-index: 1; }
+.open .letter { transform: translateY(-100px); transition: transform 0.4s 0.6s ease, z-index 0.6s; z-index: 2; }
+
+.hearts { position: absolute; top: 90px; left: 0; right: 0; z-index: 2; }
+.heart { position: absolute; bottom: 0; right: 10%; pointer-events: none; }
+.heart:before, .heart:after {
+  position: absolute; content: ""; left: 50px; top: 0; width: 50px; height: 80px; background: #e60073;
+  border-radius: 50px 50px 0 0; transform: rotate(-45deg); transform-origin: 0 100%;
+}
+.a1:before, .a1:after { background: #ff4d88; } .a2:before, .a2:after { background: #ff80aa; } .a3:before, .a3:after { background: #ffb3cc; }
+.heart:after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
+.close .heart { opacity: 0; animation: none; }
+.a1 { left: 20%; transform: scale(0.6); opacity: 1; animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate; animation-fill-mode: forwards; animation-delay: .7s; }
+.a2 { left: 55%; transform: scale(1); opacity: 1; animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate; animation-fill-mode: forwards; animation-delay: .7s; }
+.a3 { left: 10%; transform: scale(0.8); opacity: 1; animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate; animation-fill-mode: forwards; animation-delay: .7s; }
+@keyframes slideUp { 0% { top: 0; opacity: 1; } 100% { top: -120vh; opacity: 0; } }
+@keyframes sideSway { 0% { margin-left: 0; } 50% { margin-left: -20px; } 100% { margin-left: 50px; } }
+
+.reset { text-align: center; margin-top: 15px; z-index: 2; position: relative; }
+.reset button {
+  font-weight: 800; transition: all .1s linear; background: transparent; border: 2px solid #d9534f; border-radius: 4px; color: #d9534f;
+  display: inline-block; font-size: 14px; text-transform: uppercase; margin: 5px; padding: 10px; line-height: 1; min-width: 120px; cursor: pointer;
+}
+.reset button:hover { background: #d9534f; color: #fff; }
+
+.background-dim { position: fixed; inset: 0; background: rgba(0,0,0,0); transition: background .4s ease; z-index: 1; pointer-events: none; }
+.background-dim.dim { background: rgba(0,0,0,0.35); }
+
+/* Flowers */
+.flowers { position: absolute; inset: -150px; pointer-events: none; z-index: 2; }
+\1
+  animation-fill-mode: forwards, both;
+  animation-direction: normal, alternate;
+}
+.flower::before, .flower::after { content: ""; position: absolute; inset: 0; border-radius: 50%; }
+.flower::after { width: 6px; height: 6px; top: 3px; left: 3px; background: #ffd166; }
+.flower::before {
+  width: 6px; height: 6px; top: 0; left: 3px; border-radius: 50%; background: var(--petal, #ff9ecf);
+  box-shadow: 0 6px 0 0 var(--petal, #ff9ecf), -4px 3px 0 0 var(--petal, #ff9ecf), 4px 3px 0 0 var(--petal, #ff9ecf);
+}
+.flower.pink  { --petal: #ff9ecf; } .flower.lilac { --petal: #c7a1ff; } .flower.peach { --petal: #ffb3a7; } .flower.mint  { --petal: #a8f0d1; }
+@keyframes flower-bloom { 0% { transform: translate(var(--x,0), var(--y,0)) scale(var(--scale,1)); opacity: 0; }
+ 60% { transform: translate(var(--x,0), var(--y,0)) scale(var(--scale,.5)); opacity: 1; }
+100% { transform: translate(var(--x,0), var(--y,0)) scale(var(--scale,1)); opacity: 1; } }
+@keyframes flower-float {
+ 0% { transform: translate(var(--x,0), var(--y,0)) scale(var(--scale,1)) rotate(0deg); }
+ 50% { transform: translate(calc(var(--x,0) + 6px), calc(var(--y,0) - 8px)) scale(var(--scale,.5)) rotate(8deg); }
+100% { transform: translate(calc(var(--x,0) + 12px), calc(var(--y,0) - 16px)) scale(var(--scale,1)) rotate(15deg); }
+}
+
+/* Fireworks */
+.fireworks { position: absolute; inset: -150px; pointer-events: none; z-index: 2; }
+.burst { position: absolute; width: 0; height: 0; transform: translate(-50%, -50%); }
+.spark {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--spark, #ffd166); opacity: 0; transform-origin: 0 0;
+  animation: spark-out 900ms ease-out forwards, spark-fade 1200ms ease-out forwards;
+}
+.spark.pink{--spark:#ff9ecf}.spark.lilac{--spark:#c7a1ff}.spark.peach{--spark:#ffb3a7}.spark.mint{--spark:#a8f0d1}.spark.sun{--spark:#ffd166}.spark.coral{--spark:#ff6f61}
+@keyframes spark-out { 0% { transform: rotate(var(--deg)) translate(0px) scale(1); opacity: 0; } 20% { opacity: 1; } 100% { transform: rotate(var(--deg)) translate(var(--r)) scale(0.9); opacity: 1; } }
+@keyframes spark-fade { 0% { filter: brightness(1); } 100% { filter: brightness(0.6); opacity: 0.15; } }
+
+/* Modal */
+.image-modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,0); opacity: 0; pointer-events: none; transition: opacity .3s ease, background .3s ease; z-index: 999; }
+.image-modal.show { background: rgba(0,0,0,0.65); opacity: 1; pointer-events: auto; }
+.image-modal__content { max-width: min(90vw, 820px); max-height: 85vh; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.4); transform: scale(.95); transition: transform .25s ease; }
+.image-modal.show .image-modal__content { transform: scale(1); }
+.image-modal__content img { display: block; width: 100%; height: auto; }
+.image-modal__backdrop { position: absolute; inset: 0; }
+
+/* Heart clickable area (active only when open) */
+.heart-click {
+  position: absolute; bottom: 55px; left: 50%; transform: translateX(-50%);
+  width: 70px; height: 70px; border-radius: 50%; background: transparent; cursor: pointer; z-index: 10; pointer-events: none;
+}
+#envelope.open .heart-click { pointer-events: auto; }
+
+/* Photo reveal */
+.letter-photo {
+  position: absolute;  left: 50%;
+   
+  border-radius: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); 
+  width: 70%; max-width: 420px; z-index: 6;
+  top: 70%; left: 50%;
+  transform: translateX(-50%) scale(.92) rotate(-2deg);
+  opacity: 0;
+  will-change: top, transform, opacity;
+}
+
+
+
+
+/* Photo slides up from inside the envelope (mirrors letter's 0.4s rise) */
+@keyframes photo-slide-up {
+  0%   { top: 70%; transform: translateX(-50%) scale(.92) rotate(-2deg); opacity: 0; }
+  60%  { top: 18%; transform: translateX(-50%) scale(1.02) rotate(-1deg); opacity: 1; }
+  100% { top: 15%; transform: translateX(-50%) scale(1) rotate(0deg);   opacity: 1; }
+}
+
+/* Reveal photo on second click (supports nested or sibling markup) */
+#envelope.open.show-photo .letter .letter-photo,
+#envelope.open.show-photo ~ .letter-photo {
+  animation: photo-slide-up .4s ease-out forwards;
+}

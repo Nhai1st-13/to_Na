@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Love Letter — Parallax BG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./love_portable.css" />
+  </head>
+  <body>
+    <!-- Parallax background layer -->
+    <div class="bg-parallax" aria-hidden="true"></div>
+
+    <div class="envlope-wrapper">
+      <div id="envelope" class="close" aria-label="Love letter envelope" role="button" tabindex="0">
+        <div class="front flap"></div>
+        <div class="front pocket"></div>
+        <div class="letter">
+    <img src="./iu_Na.jpg" alt="Na iu dấu yêu" class="letter-photo" />
+
+          <div class="words line1">To: Na của anh</div>
+          <div class="words line2">Chúc bé ngày 20/10 vui vẻ</div>
+          <div class="words line3">Luôn xinh đẹp, hạnh phúc</div>
+          <div class="words line4">Và càng yêu anh nhiều hơn,</div>
+          <div class="words line4">Anh yêu bé nhiều,</div>
+          
+          
+
+        </div>
+        <div class="heart-click" title="Click me"></div>
+        <div class="hearts">
+          <div class="heart a1"></div>
+          <div class="heart a2"></div>
+          <div class="heart a3"></div>
+        </div>
+        <div class="flowers" aria-hidden="true"></div>
+        <div class="fireworks" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    
+
+    <div class="reset">
+      <button id="open" aria-label="Open the envelope">Open</button>
+      <button id="reset" aria-label="Close the envelope">Close</button>
+    </div>
+
+    <div class="background-dim" aria-hidden="true"></div>
+
+    <div class="image-modal" aria-hidden="true">
+      <div class="image-modal__backdrop"></div>
+      <div class="image-modal__content">
+        <img src="./iu_Na.jpg" alt="Na iu dấu yêu" />
+      </div>
+    </div>
+
+    <audio id="bg-music" src="./music.mp3" preload="auto" autoplay loop></audio>
+
+    <script src="./love_portable.js"></script>
+
+   
+  </body>
+</html>
